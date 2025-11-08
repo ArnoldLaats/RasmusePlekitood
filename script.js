@@ -91,7 +91,7 @@ if (projectGallery) {
     div.className = "project";
     div.dataset.folder = project.folder;
     div.innerHTML = `
-      <img src="assets/projects/${project.folder}/main.jpg" alt="${project.name}" loading="lazy">
+      <img src="images/gallery/${project.folder}/main.jpg" alt="${project.name}" loading="lazy">
       <p>${project.name}</p>
     `;
     projectGallery.appendChild(div);
@@ -114,6 +114,7 @@ function openProjectGallery(folder) {
 
   // --- Show main viewer ---
   if (project.type === "youtube") {
+    // Show iframe video
     viewerVideo.style.display = "block";
     viewerVideo.src = `https://www.youtube.com/embed/${project.videoId}?autoplay=0&rel=0`;
     viewerLarge.style.display = "none";
@@ -121,7 +122,7 @@ function openProjectGallery(folder) {
   } else {
     viewerVideo.style.display = "none";
     viewerLarge.style.display = "block";
-    viewerLarge.src = `assets/projects/${folder}/main.jpg`;
+    viewerLarge.src = `images/gallery/${folder}/main.jpg`;
     fullscreenBtn.style.display = "block";
   }
 
@@ -132,7 +133,7 @@ function openProjectGallery(folder) {
   if (project.type === "youtube") {
     const videoThumb = document.createElement("div");
     videoThumb.className = "video-thumb";
-    videoThumb.innerHTML = `<img src="assets/projects/${folder}/video.jpg" alt="Video"><span class="play-icon">▶</span>`;
+    videoThumb.innerHTML = `<img src="images/gallery/${folder}/video.jpg" alt="Video"><span class="play-icon">▶</span>`;
     videoThumb.addEventListener("click", () => {
       viewerVideo.style.display = "block";
       viewerVideo.src = `https://www.youtube.com/embed/${project.videoId}?autoplay=0&rel=0`;
@@ -145,8 +146,8 @@ function openProjectGallery(folder) {
   // Add numbered images
   for (let i = 1; i <= totalImages; i++) {
     const img = document.createElement("img");
-    img.src = `assets/projects/${folder}/${i}.jpg`;
-    img.dataset.full = `assets/projects/${folder}/${i}.jpg`;
+    img.src = `images/gallery/${folder}/${i}.jpg`;
+    img.dataset.full = `images/gallery/${folder}/${i}.jpg`;
     img.alt = `Image ${i}`;
     img.addEventListener("click", () => {
       viewerVideo.style.display = "none";
@@ -160,6 +161,7 @@ function openProjectGallery(folder) {
 
   viewerGrid.appendChild(fragment);
 
+  // --- Highlight first thumbnail ---
   const firstActive = project.type === "youtube"
     ? viewerGrid.querySelector(".video-thumb")
     : viewerGrid.querySelector("img");
