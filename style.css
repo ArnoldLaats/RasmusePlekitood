@@ -1,0 +1,788 @@
+/* --- Basic Reset --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f7f7f7;
+}
+
+header {
+  background: #1e293b;
+  color: #fff;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* Hamburger menu button */
+.hamburger {
+  display: none;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+}
+
+/* Logo styling */
+.logo img {
+  height: 50px;
+  width: auto;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .logo img {
+    height: 40px;
+  }
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative; /* for mobile absolute menu */
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav ul li {
+  margin-left: 20px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #38bdf8;
+}
+
+/* --- Mobile Styles --- */
+@media (max-width: 768px) {
+  /* Show hamburger on mobile */
+  .hamburger {
+    display: block;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+    padding: 0 1rem; /* add horizontal padding */
+    word-wrap: break-word; /* ensure long words wrap */
+  }
+
+  .hero p {
+    font-size: 1rem;
+    padding: 0 1rem; /* add horizontal padding */
+    word-wrap: break-word;
+  }
+
+  .hero .btn {
+    padding: 0.6rem 1.2rem; /* slightly smaller button */
+    font-size: 0.9rem;
+  }
+
+  /* Hide nav menu by default */
+  nav ul {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #1e293b;
+    padding: 1rem 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    z-index: 999;
+  }
+
+  nav ul li {
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  /* Show nav menu when active */
+  nav ul.active {
+    display: flex;
+  }
+}
+
+/* --- Hero Section --- */
+.hero {
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+              url('images/hero-bg.jpg')
+              no-repeat center center/cover;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+  flex-direction: column;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn {
+  background: #38bdf8;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #0284c7;
+}
+
+/* --- Sections --- */
+section {
+  padding: 4rem 0;
+}
+
+section h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #1e293b;
+}
+
+.about, .services, .contact {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.service {
+  background: #f1f5f9;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.service:hover {
+  transform: translateY(-5px);
+}
+
+/* --- About Section: Circle + Text --- */
+.about-content {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.about-circle {
+  flex: 0 0 160px;
+  height: 160px;
+  width: 160px;
+  border: 4px solid #38bdf8;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: #fff;
+  font-weight: bold;
+  color: #1e293b;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.about-circle .years {
+  font-size: 3rem;
+}
+
+.about-circle p {
+  margin: 0 0 0 0;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #475569;
+}
+
+/* About text section */
+.about-text {
+  flex: 1;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .about-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-circle {
+    margin-bottom: 1rem;
+  }
+}
+
+/* --- Footer --- */
+footer {
+  background: #1e293b;
+  color: #fff;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+/* --- Gallery Section --- */
+.gallery {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+
+  /* Gallery grid - 1 column for small screens */
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    justify-items: center; /* center the items */
+  }
+
+  .project {
+    width: 90%; /* leave some space on edges */
+  }
+
+  /* Modal adjustments */
+  .project-viewer {
+    flex-direction: column;
+    max-width: 100%;
+    min-height: auto;
+  }
+
+  .viewer-left {
+    width: 100%;
+    border-right: none;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #viewer-large,
+  #viewer-video {
+    width: 90%;
+    max-height: 60vh;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+
+  .viewer-right {
+    width: 100%;
+    padding: 0 1rem 1rem 1rem;
+  }
+
+  /* Thumbnail strip scroll horizontally */
+  .viewer-grid {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    gap: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+.viewer-grid img,
+.video-thumb {
+  flex: 0 0 80px;      /* fixed width */
+  width: 80px;
+  height: 80px;         /* same as width to make it square */
+  cursor: pointer;
+  object-fit: cover;    /* ensures image fills square without distortion */
+  border-radius: 6px;
+}
+
+/* Optional: make it 2 rows if more thumbnails */
+.viewer-grid {
+  flex-wrap: wrap;      /* allows multiple rows */
+  max-height: 180px;    /* enough space for 2 rows of 80px + gap */
+}
+
+
+  /* Hide scrollbar for cleaner look */
+  .viewer-grid::-webkit-scrollbar {
+    display: none;
+  }
+  .viewer-grid {
+    -ms-overflow-style: none;  /* IE/Edge */
+    scrollbar-width: none;      /* Firefox */
+  }
+}
+
+
+
+
+.project {
+  cursor: pointer;
+  text-align: center;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  background: #f8fafc;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.project img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.project p {
+  padding: 0.75rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+/* --- Project Modal --- */
+.project-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+  padding: 2rem;
+}
+
+.project-viewer {
+  background: #fff;
+  border-radius: 12px;
+  display: flex;
+  max-width: 1000px;
+  width: 90%;
+  min-height: 600px;
+  position: relative;
+  overflow: hidden;
+}
+
+#close-project-modal {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 32px;
+  color: #333;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.viewer-left {
+  flex: 2;
+  background: #f1f5f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid #e2e8f0;
+}
+
+#viewer-large {
+  max-width: 100%;
+  max-height: 90%;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+
+.viewer-right {
+  flex: 1;
+  background: #fff;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.viewer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 0.5rem;
+}
+
+.viewer-grid img {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.viewer-grid img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.viewer-grid img.active,
+.video-thumb.active {
+  transform: scale(1.05);
+  border: 2px solid #38bdf8;
+  z-index: 5;
+}
+
+.viewer-large-container {
+  position: relative;
+  width: 100%;
+}
+
+#viewer-large {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
+
+#fullscreen-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  font-size: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 1001;
+  transition: background 0.2s;
+}
+
+#fullscreen-btn:hover {
+  background: rgba(0,0,0,0.9);
+}
+
+/* --- Contact Form --- */
+form {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+input, textarea {
+  padding: 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #f8fafc;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+input:focus, textarea:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 4px rgba(56,189,248,0.5);
+  outline: none;
+}
+
+.form-status {
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.contact-info {
+  margin-top: 2rem;
+  text-align: center;
+  color: #475569;
+}
+
+.contact-info a {
+  color: #0284c7;
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}
+
+/* Video thumbnail styles */
+.video-thumb {
+  width: 100%;
+  height: 80px;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  display: block;
+}
+
+.video-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 6px;
+}
+
+.video-thumb .play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: rgba(255,255,255,0.9);
+  text-shadow: 0 0 6px rgba(0,0,0,0.7);
+  pointer-events: none;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  nav ul li {
+    margin: 10px 0;
+  }
+}
+
+/* Mobile/Android view: hide modal panel */
+/* Mobile/Android view: hide modal panel and adjust image */
+@media (max-width: 768px) {
+
+  /* Make modal full screen */
+  .project-modal {
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.85);
+    padding: 0;
+    inset: 0;
+  }
+
+  /* Panel container fully transparent */
+  .project-viewer {
+    background: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+    position: relative; /* for fullscreen button positioning */
+  }
+
+  /* Big image/video centered with 5% margin on both sides */
+  #viewer-large,
+  #viewer-video {
+    position: relative;
+    width: 90vw !important;       /* 90% width of viewport */
+    max-width: 90vw !important;
+    margin: 0 5vw !important;     /* 5% margin on left/right */
+    height: auto !important;
+    max-height: 90vh !important;  /* leave space for thumbnails */
+    object-fit: contain;
+    border-radius: 0;
+    z-index: 1000;
+  }
+
+  /* Fullscreen button top-right of the image with 10% margin */
+  #fullscreen-btn {
+    position: absolute;
+    top: 10%;                     /* 5% from top of viewer container */
+    right: 10%;                   /* 5% from right of viewer container */
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    border: none;
+    padding: 6px 10px;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 1001;
+    transition: background 0.2s;
+  }
+
+  #fullscreen-btn:hover {
+    background: rgba(0,0,0,0.9);
+  }
+
+  /* Thumbnails fixed at bottom of screen */
+  .viewer-right {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    background: rgba(0,0,0,0.85) !important;
+    padding: 0.5rem 0 !important;
+    display: flex !important;
+    overflow-x: auto !important;
+    gap: 0.5rem !important;
+    justify-content: flex-start !important;
+    z-index: 1001 !important;
+  }
+
+  .viewer-grid {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    padding: 0 0.5rem;
+  }
+
+  .viewer-grid img,
+  .video-thumb {
+    width: 80px;
+    height: 80px;
+    flex: 0 0 auto;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+  /* Hide close button (X) on mobile */
+  #close-project-modal {
+    display: none !important;
+  }
+
+  /* Viewer left container just centers the image/video */
+  .viewer-left {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none !important;
+    padding: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Make gallery grid horizontal */
+  .gallery-grid {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    gap: 1rem;
+    padding: 1rem;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; /* smooth momentum scroll on iOS */
+  }
+
+  /* Each project card */
+  .gallery-grid .project {
+    flex: 0 0 auto;     /* prevent shrinking */
+    width: 250px;       /* or adjust to preferred width */
+    height: auto;       /* height adjusts based on content */
+  }
+
+  /* Hide vertical scrollbar for cleaner look */
+  .gallery-grid::-webkit-scrollbar {
+    display: none;
+  }
+  .gallery-grid {
+    -ms-overflow-style: none;  /* IE/Edge */
+    scrollbar-width: none;      /* Firefox */
+  }
+}
+
+/* --- Viewer iframe (YouTube) --- */
+#viewer-video {
+  display: none;               /* hidden by default */
+  width: 100%;                 /* fill container width */
+  height: auto;                /* height adjusts for 16:9 aspect ratio */
+  max-height: 100%;            /* don’t exceed container height */
+  border-radius: 8px;
+  transition: transform 0.2s;
+  aspect-ratio: 16 / 9;        /* force 16:9 ratio */
+  object-fit: cover;           /* fills container without black bars */
+}
+
+/* Ensure viewer-left scales with content */
+.project-viewer .viewer-left {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f1f5f9;
+  border-right: 1px solid #e2e8f0;
+  padding: 0;                  /* remove padding to reduce black space */
+  width: 100%;
+  height: auto;                /* scale based on content */
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  #viewer-video {
+    width: 90vw;
+    max-width: 90vw;
+    height: auto;
+    max-height: 90vh;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .viewer-left {
+    width: 100%;
+    border-right: none;
+    padding: 0;
+    background: none;
+  }
+}

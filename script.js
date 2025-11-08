@@ -1,0 +1,206 @@
+// --- Smooth scroll for navigation links ---
+document.querySelectorAll('nav a').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute('href')).scrollIntoView({
+      behavior: 'smooth'
+    });
+
+    // Close mobile menu after clicking
+    const navMenu = document.querySelector('nav ul');
+    if (navMenu.classList.contains('active')) {
+      navMenu.classList.remove('active');
+    }
+  });
+});
+
+// --- Hamburger menu toggle ---
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('nav ul');
+
+if (hamburger && navMenu) {
+  hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+  });
+}
+
+// --- Contact form handling (no backend) ---
+const contactForm = document.getElementById("contactForm");
+const formStatus = document.getElementById("form-status");
+
+if (contactForm) {
+  contactForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    if (!name || !email || !message) {
+      formStatus.textContent = "Palun täida kõik kohustuslikud väljad.";
+      formStatus.style.color = "red";
+      return;
+    }
+
+    const subject = encodeURIComponent(`Päring Rasmuse Plekitööde kodulehelt`);
+    const body = encodeURIComponent(
+      `Nimi: ${name}\nE-post: ${email}\nTelefon: ${phone}\n\nSõnum:\n${message}`
+    );
+
+    const mailtoLink = `mailto:info@rasmuseplekitood.ee?subject=${subject}&body=${body}`;
+    window.location.href = mailtoLink;
+
+    formStatus.textContent = "Avaneb e-posti rakendus sõnumi saatmiseks.";
+    formStatus.style.color = "green";
+    contactForm.reset();
+  });
+}
+
+// --- Dynamic Project Gallery ---
+const projectGallery = document.getElementById("project-gallery");
+const projectModal = document.getElementById("project-modal");
+const closeProjectModal = document.getElementById("close-project-modal");
+const viewerLarge = document.getElementById("viewer-large");
+const viewerGrid = document.getElementById("viewer-grid");
+const fullscreenBtn = document.getElementById("fullscreen-btn");
+const viewerVideo = document.getElementById("viewer-video");
+
+// Define image counts per project
+const projectImagesCount = {
+  project1: 11,
+  project2: 1,
+  project3: 17,
+  project4: 13,
+  project5: 7
+};
+
+// Define projects
+const projects = [
+  { folder: "project1", name: "Niine 11 - Tallinn", type: "youtube", videoId: "757lWydrCFE" },
+  { folder: "project2", name: "Luige 15 - Tallinn", type: "image" },
+  { folder: "project3", name: "Põhjatähe Põhikool - Tallinn", type: "youtube", videoId: "FNJIQmRCq60" },
+  { folder: "project4", name: "Tolli 8 - Tallinn", type: "youtube", videoId: "PVGo_CoxSe4" },
+  { folder: "project5", name: "Vaata veel", type: "image" }
+];
+
+// --- Generate main gallery ---
+if (projectGallery) {
+  projects.forEach(project => {
+    const div = document.createElement("div");
+    div.className = "project";
+    div.dataset.folder = project.folder;
+    div.innerHTML = `
+      <img src="images/gallery/${project.folder}/main.jpg" alt="${project.name}" loading="lazy">
+      <p>${project.name}</p>
+    `;
+    projectGallery.appendChild(div);
+
+    div.addEventListener("click", () => openProjectGallery(project.folder));
+  });
+}
+
+// --- Open modal with project images ---
+function openProjectGallery(folder) {
+  projectModal.style.display = "flex";
+  viewerGrid.innerHTML = "";
+
+  const project = projects.find(p => p.folder === folder);
+  const totalImages = projectImagesCount[folder] || 6;
+
+  // Stop any existing video
+  viewerVideo.src = "";
+  viewerVideo.style.display = "none";
+
+  // --- Show main viewer ---
+  if (project.type === "youtube") {
+    // Show iframe video
+    viewerVideo.style.display = "block";
+    viewerVideo.src = `https://www.youtube.com/embed/${project.videoId}?autoplay=0&rel=0`;
+    viewerLarge.style.display = "none";
+    fullscreenBtn.style.display = "none";
+  } else {
+    viewerVideo.style.display = "none";
+    viewerLarge.style.display = "block";
+    viewerLarge.src = `images/gallery/${folder}/main.jpg`;
+    fullscreenBtn.style.display = "block";
+  }
+
+  // --- Populate viewer grid ---
+  const fragment = document.createDocumentFragment();
+
+  // Video thumbnail first if YouTube
+  if (project.type === "youtube") {
+    const videoThumb = document.createElement("div");
+    videoThumb.className = "video-thumb";
+    videoThumb.innerHTML = `<img src="images/gallery/${folder}/video.jpg" alt="Video"><span class="play-icon">▶</span>`;
+    videoThumb.addEventListener("click", () => {
+      viewerVideo.style.display = "block";
+      viewerVideo.src = `https://www.youtube.com/embed/${project.videoId}?autoplay=0&rel=0`;
+      viewerLarge.style.display = "none";
+      highlightThumbnail(videoThumb);
+    });
+    fragment.appendChild(videoThumb);
+  }
+
+  // Add numbered images
+  for (let i = 1; i <= totalImages; i++) {
+    const img = document.createElement("img");
+    img.src = `images/gallery/${folder}/${i}.jpg`;
+    img.dataset.full = `images/gallery/${folder}/${i}.jpg`;
+    img.alt = `Image ${i}`;
+    img.addEventListener("click", () => {
+      viewerVideo.style.display = "none";
+      viewerLarge.style.display = "block";
+      viewerLarge.src = img.dataset.full;
+      fullscreenBtn.style.display = "block";
+      highlightThumbnail(img);
+    });
+    fragment.appendChild(img);
+  }
+
+  viewerGrid.appendChild(fragment);
+
+  // --- Highlight first thumbnail ---
+  const firstActive = project.type === "youtube"
+    ? viewerGrid.querySelector(".video-thumb")
+    : viewerGrid.querySelector("img");
+  if (firstActive) highlightThumbnail(firstActive);
+}
+
+// --- Highlight clicked thumbnail ---
+function highlightThumbnail(el) {
+  document.querySelectorAll("#viewer-grid img, #viewer-grid .video-thumb").forEach(e => e.classList.remove("active"));
+  el.classList.add("active");
+}
+
+// --- Close modal ---
+closeProjectModal.addEventListener("click", () => {
+  projectModal.style.display = "none";
+  viewerGrid.innerHTML = "";
+  viewerLarge.src = "";
+  viewerVideo.src = "";
+});
+
+// --- Close modal by clicking background ---
+projectModal.addEventListener("click", e => {
+  if (e.target === projectModal) {
+    projectModal.style.display = "none";
+    viewerGrid.innerHTML = "";
+    viewerLarge.src = "";
+    viewerVideo.src = "";
+  }
+});
+
+// --- Fullscreen button ---
+if (fullscreenBtn) {
+  fullscreenBtn.addEventListener("click", () => {
+    if (!document.fullscreenElement) {
+      viewerLarge.requestFullscreen().catch(err => {
+        alert(`Full screen failed: ${err.message}`);
+      });
+    } else {
+      document.exitFullscreen();
+    }
+  });
+}

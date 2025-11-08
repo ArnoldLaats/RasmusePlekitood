@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rasmuse Plekitööde OÜ</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <div class="logo">
+        <a href="#hero">
+          <img src="images/logo.png" alt="Rasmuse Plekitööde OÜ" />
+        </a>
+      </div>
+
+      <button class="hamburger" id="hamburger">&#9776;</button>
+      
+      <ul>
+        <li><a href="#about">Meist</a></li>
+        <li><a href="#services">Teenused</a></li>
+        <li><a href="#gallery">Galerii</a></li>
+        <li><a href="#contact">Kontakt</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+  <section class="hero">
+    <h1>Rasmuse Plekitööde OÜ</h1>
+    <p>Kvaliteetsed plekitööd ja katuselahendused üle Eesti</p>
+    <a href="#contact" class="btn">Võta ühendust</a>
+  </section>
+
+  <div class="container">
+    <section id="about" class="about">
+  <h2>Meist</h2>
+  <div class="about-content">
+    <!-- Circle with number -->
+    <div class="about-circle">
+      <span class="years">19</span>
+        <p>Aastat Tegutsenud</p>
+    </div>
+
+    <!-- Text content -->
+    <div class="about-text">
+      <p>
+        Rasmuse Plekitööde OÜ pakub professionaalseid plekitöid ja katusepaigaldusteenuseid.
+        Meie eesmärk on pakkuda kvaliteetset, kestvat ja esteetilist tulemust igale kliendile,
+        olgu tegemist eramaja, ärihoone või tööstusobjektiga.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+    <section id="services" class="services">
+      <h2>Teenused</h2>
+      <div class="services-grid">
+        <div class="service">
+          <h3>Katusetööd</h3>
+          <p>Katuste paigaldus, hooldus ja renoveerimine vastavalt kliendi soovidele.</p>
+        </div>
+        <div class="service">
+          <h3>Plekitööd</h3>
+          <p>Kvaliteetsed metallplekitööd, vihmaveesüsteemid ja detailide valmistamine.</p>
+        </div>
+        <div class="service">
+          <h3>Mingi lahendus</h3>
+          <p>Jah.</p>
+        </div>
+      </div>
+    </section>
+
+<!-- GALLERY SECTION -->
+<section id="gallery" class="gallery">
+  <h2>Galerii</h2>
+
+  <!-- Dynamic project grid -->
+  <div class="gallery-grid" id="project-gallery"></div>
+
+  <!-- Project viewer modal -->
+  <div id="project-modal" class="project-modal">
+    <div class="project-viewer">
+      <span id="close-project-modal">&times;</span>
+      
+      <div class="viewer-left">
+        <div class="viewer-large-container">
+          <img id="viewer-large" src="" alt="Suur pilt" />
+          <!-- Replace your existing video tag -->
+<iframe id="viewer-video" style="display:none;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <button id="fullscreen-btn" title="Full screen">⛶</button>
+        </div>
+      </div>
+
+      <div class="viewer-right">
+        <div id="viewer-grid" class="viewer-grid"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <section id="contact" class="contact">
+  <h2>Kontakt</h2>
+  <p>
+    Täida allolev vorm, et saada hinnapäring või lisainfot meie teenuste kohta.
+  </p>
+
+  <form id="contactForm">
+    <div class="form-group">
+      <label for="name">Nimi *</label>
+      <input type="text" id="name" name="name" placeholder="Sinu nimi" required />
+    </div>
+
+    <div class="form-group">
+      <label for="email">E-post *</label>
+      <input type="email" id="email" name="email" placeholder="Sinu e-post" required />
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Telefon</label>
+      <input type="tel" id="phone" name="phone" placeholder="Sinu telefon" />
+    </div>
+
+    <div class="form-group">
+      <label for="message">Sõnum *</label>
+      <textarea id="message" name="message" rows="5" placeholder="Kirjuta oma sõnum..." required></textarea>
+    </div>
+
+    <button type="submit" class="btn">Saada päring</button>
+  </form>
+
+  <p id="form-status" class="form-status"></p>
+
+  <div class="contact-info">
+    <p>📍 Tallinn, Märjamaa, Eesti</p>
+    <p>📞 <a href="tel:+3725087038">+372 5087038</a></p>
+    <p>✉️ <a href="mailto:info@rasmuseplekitood.ee">info@rasmuseplekitood.ee</a></p>
+  </div>
+</section>
+  </div>
+
+  <footer>
+    <p>© 2025 Rasmuse Plekitööde OÜ. Kõik õigused kaitstud.</p>
+  </footer>
+
+  <script src="gallery.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
