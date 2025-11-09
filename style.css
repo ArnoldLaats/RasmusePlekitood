@@ -423,15 +423,7 @@ footer {
   overflow: hidden;
 }
 
-#close-project-modal {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  font-size: 32px;
-  color: #333;
-  cursor: pointer;
-  z-index: 10;
-}
+
 
 .viewer-left {
   flex: 2;
@@ -704,11 +696,6 @@ input:focus, textarea:focus {
     border-radius: 6px;
   }
 
-  /* Hide close button (X) on mobile */
-  #close-project-modal {
-    display: none !important;
-  }
-
   /* Viewer left container just centers the image/video */
   .viewer-left {
     width: 100%;
@@ -802,5 +789,4 @@ input:focus, textarea:focus {
     background: transparent;
   }
 }
-
 
