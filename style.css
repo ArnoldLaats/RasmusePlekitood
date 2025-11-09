@@ -790,3 +790,7 @@ input:focus, textarea:focus {
   }
 }
 
+#close-project-modal {
+  display: none !important;
+}
+
