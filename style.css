@@ -289,7 +289,6 @@ footer {
 
 .gallery-grid {
   display: grid;
-  grid-auto-flow: column;           /* make items flow horizontally */
   grid-auto-columns: minmax(250px, 1fr);
   grid-template-columns: auto auto auto;
   gap: 1.5rem;
@@ -803,4 +802,5 @@ input:focus, textarea:focus {
     background: transparent;
   }
 }
+
 
