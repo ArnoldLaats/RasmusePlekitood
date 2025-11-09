@@ -203,12 +203,13 @@ projectModal.addEventListener("click", e => {
   const mainImage = document.getElementById("viewer-large");
   const mainVideo = document.getElementById("viewer-video");
   const viewerGridEl = document.querySelector(".viewer-right");
+  const fsBtn = document.getElementById("fullscreen-btn");
 
-  // If the click is NOT on image, video, or grid, close modal
   if (
     e.target !== mainImage &&
     e.target !== mainVideo &&
-    !viewerGridEl.contains(e.target)
+    !viewerGridEl.contains(e.target) &&
+    e.target !== fsBtn
   ) {
     projectModal.style.display = "none";
     viewerGrid.innerHTML = "";
@@ -217,18 +218,23 @@ projectModal.addEventListener("click", e => {
   }
 });
 
-// --- Fullscreen button ---
+
+// --- Fullscreen button now opens image in new tab ---
 if (fullscreenBtn) {
+  // Remove old click listeners
+  fullscreenBtn.onclick = null;
+
   fullscreenBtn.addEventListener("click", () => {
-    if (!document.fullscreenElement) {
-      viewerLarge.requestFullscreen().catch(err => {
-        alert(`Full screen failed: ${err.message}`);
-      });
-    } else {
-      document.exitFullscreen();
+    const img = document.getElementById("viewer-large");
+    if (img && img.style.display !== "none") {
+      // Open image in new tab
+      window.open(img.src, "_blank");
+      
+      // Keep project modal and panel visible (do nothing else)
     }
   });
 }
+
 
 // --- Auto horizontal scroll hint ---
 (function() {
@@ -298,3 +304,4 @@ if (fullscreenBtn) {
   window.addEventListener('resize', checkVisibility);
   checkVisibility();
 })();
+
