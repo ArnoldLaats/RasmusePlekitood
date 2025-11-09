@@ -108,13 +108,12 @@ function openProjectGallery(folder) {
   const project = projects.find(p => p.folder === folder);
   const totalImages = projectImagesCount[folder] || 6;
 
-  // Stop any existing video
+  // Reset video
   viewerVideo.src = "";
   viewerVideo.style.display = "none";
 
-  // --- Show main viewer ---
+  // --- Set initial viewer ---
   if (project.type === "youtube") {
-    // Show iframe video
     viewerVideo.style.display = "block";
     viewerVideo.src = `https://www.youtube.com/embed/${project.videoId}?autoplay=0&rel=0`;
     viewerLarge.style.display = "none";
@@ -126,14 +125,16 @@ function openProjectGallery(folder) {
     fullscreenBtn.style.display = "block";
   }
 
-  // --- Populate viewer grid ---
   const fragment = document.createDocumentFragment();
 
-  // Video thumbnail first if YouTube
+  // --- Video thumbnail first (if YouTube) ---
   if (project.type === "youtube") {
     const videoThumb = document.createElement("div");
     videoThumb.className = "video-thumb";
-    videoThumb.innerHTML = `<img src="images/gallery/${folder}/video.jpg" alt="Video"><span class="play-icon">▶</span>`;
+    videoThumb.innerHTML = `
+      <img src="images/gallery/${folder}/video.jpg" alt="Video">
+      <span class="play-icon">▶</span>
+    `;
     videoThumb.addEventListener("click", () => {
       viewerVideo.style.display = "block";
       viewerVideo.src = `https://www.youtube.com/embed/${project.videoId}?autoplay=0&rel=0`;
@@ -143,7 +144,22 @@ function openProjectGallery(folder) {
     fragment.appendChild(videoThumb);
   }
 
-  // Add numbered images
+  // --- Main image always included in grid ---
+  const mainImg = document.createElement("img");
+  mainImg.src = `images/gallery/${folder}/main.jpg`;
+  mainImg.dataset.full = `images/gallery/${folder}/main.jpg`;
+  mainImg.alt = `Main image`;
+  if (project.type !== "youtube") mainImg.classList.add("active");
+  mainImg.addEventListener("click", () => {
+    viewerVideo.style.display = "none";
+    viewerLarge.style.display = "block";
+    viewerLarge.src = mainImg.dataset.full;
+    fullscreenBtn.style.display = "block";
+    highlightThumbnail(mainImg);
+  });
+  fragment.appendChild(mainImg);
+
+  // --- Numbered images ---
   for (let i = 1; i <= totalImages; i++) {
     const img = document.createElement("img");
     img.src = `images/gallery/${folder}/${i}.jpg`;
@@ -161,7 +177,7 @@ function openProjectGallery(folder) {
 
   viewerGrid.appendChild(fragment);
 
-  // --- Highlight first thumbnail ---
+  // --- Highlight first thumbnail (video if present) ---
   const firstActive = project.type === "youtube"
     ? viewerGrid.querySelector(".video-thumb")
     : viewerGrid.querySelector("img");
