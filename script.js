@@ -198,9 +198,18 @@ closeProjectModal.addEventListener("click", () => {
   viewerVideo.src = "";
 });
 
-// --- Close modal by clicking background ---
+// --- Close modal by clicking outside viewer content ---
 projectModal.addEventListener("click", e => {
-  if (e.target === projectModal) {
+  const mainImage = document.getElementById("viewer-large");
+  const mainVideo = document.getElementById("viewer-video");
+  const viewerGridEl = document.querySelector(".viewer-right");
+
+  // If the click is NOT on image, video, or grid, close modal
+  if (
+    e.target !== mainImage &&
+    e.target !== mainVideo &&
+    !viewerGridEl.contains(e.target)
+  ) {
     projectModal.style.display = "none";
     viewerGrid.innerHTML = "";
     viewerLarge.src = "";
@@ -220,3 +229,72 @@ if (fullscreenBtn) {
     }
   });
 }
+
+// --- Auto horizontal scroll hint ---
+(function() {
+  const galleryGrid = document.querySelector('.gallery-grid');
+  if (!galleryGrid) return;
+
+  let scrollAmount = 1;      // pixels per frame
+  let direction = 1;         // 1 = forward, -1 = backward
+  let autoScrollActive = false;
+  let userScrolled = false;
+
+  // Detect if element is in viewport
+  function isInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return (
+      rect.top < window.innerHeight &&
+      rect.bottom > 0
+    );
+  }
+
+  // Start auto scroll
+  function startAutoScroll() {
+    if (autoScrollActive) return;
+    autoScrollActive = true;
+
+    function step() {
+      if (!autoScrollActive) return;
+
+      galleryGrid.scrollLeft += scrollAmount * direction;
+
+      // Reverse direction at ends
+      if (galleryGrid.scrollLeft + galleryGrid.clientWidth >= galleryGrid.scrollWidth) {
+        direction = -1;
+      } else if (galleryGrid.scrollLeft <= 0) {
+        direction = 1;
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  // Stop auto scroll
+  function stopAutoScroll() {
+    autoScrollActive = false;
+  }
+
+  // Detect manual scroll by user
+  galleryGrid.addEventListener('wheel', () => {
+    userScrolled = true;
+    stopAutoScroll();
+  });
+  galleryGrid.addEventListener('touchstart', () => {
+    userScrolled = true;
+    stopAutoScroll();
+  });
+
+  // Check periodically if gallery is in viewport
+  function checkVisibility() {
+    if (!userScrolled && isInViewport(galleryGrid)) {
+      startAutoScroll();
+    }
+  }
+
+  window.addEventListener('scroll', checkVisibility);
+  window.addEventListener('resize', checkVisibility);
+  checkVisibility();
+})();
