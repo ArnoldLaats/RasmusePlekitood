@@ -269,6 +269,15 @@ footer {
   padding: 1rem 0;
 }
 
+/* Footer copyright spacing for mobile */
+@media (max-width: 768px) {
+  footer p {
+    padding-left: 1rem;   /* or use margin-left */
+    padding-right: 1rem;  /* keeps it away from the edge */
+    text-align: center;   /* optional, keep it centered */
+  }
+}
+
 /* --- Gallery Section --- */
 .gallery {
   background: #fff;
@@ -280,9 +289,9 @@ footer {
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-auto-flow: column;           /* make items flow horizontally */
+  grid-auto-columns: minmax(250px, 1fr);
   gap: 1.5rem;
-  margin-top: 2rem;
 }
 
 @media (max-width: 768px) {
@@ -362,9 +371,6 @@ footer {
     scrollbar-width: none;      /* Firefox */
   }
 }
-
-
-
 
 .project {
   cursor: pointer;
@@ -784,5 +790,15 @@ input:focus, textarea:focus {
     border-right: none;
     padding: 0;
     background: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .project-viewer {
+    width: 90%;
+    max-width: 90%;
+    height: auto;   /* scale with content */
+    border-radius: 8px;
+    background: transparent;
   }
 }
