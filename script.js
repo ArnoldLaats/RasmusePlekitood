@@ -72,7 +72,7 @@ const projectImagesCount = {
   project2: 1,
   project3: 17,
   project4: 13,
-  project5: 7
+  project5: 12
 };
 
 // Define projects
@@ -304,4 +304,5 @@ if (fullscreenBtn) {
   window.addEventListener('resize', checkVisibility);
   checkVisibility();
 })();
+
 
