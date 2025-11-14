@@ -69,19 +69,19 @@ const viewerVideo = document.getElementById("viewer-video");
 // Define image counts per project
 const projectImagesCount = {
   project1: 11,
-  project2: 1,
+  //project2: 1,
   project3: 17,
   project4: 13,
-  project5: 12
+  project99: 12
 };
 
 // Define projects
 const projects = [
   { folder: "project1", name: "Niine 11 - Tallinn", type: "youtube", videoId: "757lWydrCFE" },
-  { folder: "project2", name: "Luige 15 - Tallinn", type: "image" },
+  //{ folder: "project2", name: "Luige 15 - Tallinn", type: "image" },
   { folder: "project3", name: "Põhjatähe Põhikool - Tallinn", type: "youtube", videoId: "FNJIQmRCq60" },
   { folder: "project4", name: "Tolli 8 - Tallinn", type: "youtube", videoId: "PVGo_CoxSe4" },
-  { folder: "project5", name: "Vaata veel", type: "image" }
+  { folder: "project99", name: "Vaata veel", type: "image" }
 ];
 
 // --- Generate main gallery ---
