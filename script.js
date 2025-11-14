@@ -48,7 +48,7 @@ if (contactForm) {
       `Nimi: ${name}\nE-post: ${email}\nTelefon: ${phone}\n\nSõnum:\n${message}`
     );
 
-    const mailtoLink = `mailto:info@rasmuseplekitood.ee?subject=${subject}&body=${body}`;
+    const mailtoLink = `mailto:rasmuseplekid@gmail.com?subject=${subject}&body=${body}`;
     window.location.href = mailtoLink;
 
     formStatus.textContent = "Avaneb e-posti rakendus sõnumi saatmiseks.";
@@ -304,5 +304,4 @@ if (fullscreenBtn) {
   window.addEventListener('resize', checkVisibility);
   checkVisibility();
 })();
-
 
