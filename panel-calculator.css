@@ -1,0 +1,174 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+}
+
+.container {
+    max-width: 600px;
+    background: white;
+    padding: 20px;
+    margin: 30px auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    background: #0078ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #005fcc;
+}
+
+#results {
+    margin-top: 20px;
+    padding: 10px;
+    background: #e9f5ff;
+    border-left: 4px solid #0078ff;
+    display: none;
+}
+
+#preview {
+    margin-top: 20px;
+    padding: 10px;
+    background: #fafafa;
+    border: 1px solid #ddd;
+    min-height: 100px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center; /* center horizontally */
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+
+/* Remove stray ">" from arrows under preview */
+#roof-line .arrow {
+    display: none;
+}
+
+.panel {
+    height: 50px;
+    display: inline-block;
+    margin-left: -5px; /* visual overlap */
+    border: 1px solid #333;
+    cursor: pointer;
+}
+
+.panel:nth-child(even) {
+    background: #d0d0d0;
+}
+
+.panel:nth-child(odd) {
+    background: #bcbcbc;
+}
+
+.panel.active {
+    outline: 3px solid orange; /* full border around panel */
+    outline-offset: -2px;      /* optional, adjust so it surrounds panel nicely */
+    z-index: 1; /* draw above neighbors */
+}
+
+
+#roof-indicator {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#roof-text {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+#firstPanelWidth {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.first-panel-settings label,
+.inline-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+}
+
+.live-update-settings {
+    margin-top: 15px;
+}
+
+.live-update-settings label {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+/* Panel info styling */
+#panel-info {
+    display: none;
+    margin-top: 15px;
+    padding: 10px;
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#panel-info h3 {
+    margin: 0 0 5px 0; /* reduce top space */
+    font-size: 18px;
+}
+
+#panel-info p {
+    margin: 2px 0; /* reduce spacing between lines */
+}
+
+#panel-info .button-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    gap: 10px; /* added gap between buttons */
+}
+
+
+#panel-info button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background: #0078ff;
+    color: white;
+    cursor: pointer;
+}
+
+#panel-info button:hover {
+    background: #005fcc;
+}

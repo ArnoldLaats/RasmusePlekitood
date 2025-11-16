@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Calculator</title>
+    <link rel="stylesheet" href="panel-calculator.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Katuse Pleki Kalkulaator</h1>
+
+    <label>Katuse laius (mm):</label>
+    <input type="number" id="roofWidth" placeholder="Näiteks 5000">
+
+    <label>Paneeli laius (mm):</label>
+    <input type="number" id="panelWidth" value="460">
+
+    <!-- First panel custom width moved -->
+    <div class="first-panel-settings">
+    <label class="inline-label">
+        Esimese pleki laius käsitsi
+        <input type="checkbox" id="customFirstPanel">
+    </label>
+    <input type="number" id="firstPanelWidth" placeholder="Näiteks 300 mm" style="display:none;">
+</div>
+
+    <div class="live-update-settings">
+        <label class="inline-label">
+            Värskenda tulemusi kohe
+            <input type="checkbox" id="liveUpdate">
+        </label>
+    </div>
+
+    <button id="calcBtn">Arvuta</button>
+
+    <div id="results"></div>
+
+    <h2>Visuaalne eelvaade</h2>
+    <div id="roof-indicator">
+        <span id="roof-text"></span>
+        <div id="roof-line">
+            <span class="arrow">&lt;</span>
+            <span class="line"></span>
+            <span class="arrow">&gt;</span>
+        </div>
+    </div>
+    <div id="preview"></div>
+
+    <!-- Panel info section -->
+<div id="panel-info">
+    <h3 id="panel-number"></h3>
+    <p id="panel-position"></p>
+    <p id="panel-direction"></p>
+    <button id="toggle-edge">Arvuta paremalt / Arvuta vasakult</button>
+    <div class="button-row">
+        <button id="prev-panel">Eelmine paneel</button>
+        <button id="next-panel">Järgmine paneel</button>
+    </div>
+</div>
+
+</div>
+
+</div>
+
+<script src="panel-calculator.js"></script>
+</body>
+</html>
